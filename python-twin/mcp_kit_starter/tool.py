@@ -5,7 +5,7 @@ description, input schema, annotations and worked examples. Keeping one object
 means the thing the model reads and the thing tests assert against can never
 drift apart.
 
-This is the Python twin of ``../ts/src/tool.py``. Because the tool returns a
+This is the Python twin of ``../starter/src/tool.py``. Because the tool returns a
 fully-formed :class:`~mcp.types.CallToolResult` (so a failure can carry both
 ``isError=True`` and a structured error envelope), the success output schema is
 declared here on the :class:`ToolSpec` and attached to the registered tool so it

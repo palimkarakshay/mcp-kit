@@ -6,10 +6,10 @@
   "description": "Scores each MCP tool's name + description + schema against the tool-design rubric and fails CI below threshold.",
   "license": "MIT",
   "bin": {
-    "mcp-tool-lint": "./src/cli.ts"
+    "mcp-tool-lint": "./describe-lint.ts"
   },
   "scripts": {
-    "lint": "tsx src/cli.ts",
+    "lint": "tsx describe-lint.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
   },

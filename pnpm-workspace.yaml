@@ -1,4 +1,4 @@
 packages:
-  - "starter/ts"
+  - "starter"
   - "recipes/*"
   - "lint"

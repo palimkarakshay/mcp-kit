@@ -4,7 +4,7 @@ One server binary, two transports, chosen by ``MCP_TRANSPORT``. Everything is
 read from the environment so the same install runs locally over stdio and
 remotely over Streamable HTTP without code changes.
 
-This is the Python twin of ``../ts/src/config.ts`` and keeps the same env var
+This is the Python twin of ``../starter/src/config.ts`` and keeps the same env var
 names and defaults.
 """
 

@@ -6,7 +6,7 @@ validate a bearer token in ASGI middleware before the request ever reaches the
 MCP layer; for stdio there is no auth surface -- the parent process that spawned
 the server owns identity.
 
-This is the Python twin of ``../ts/src/auth.ts``. The Python MCP SDK ships an
+This is the Python twin of ``../starter/src/auth.ts``. The Python MCP SDK ships an
 OAuth/JWT-oriented auth stack; the starter deliberately mirrors the TS twin's
 simpler shared-bearer-token check instead, applied as a Starlette middleware
 around the Streamable HTTP app.

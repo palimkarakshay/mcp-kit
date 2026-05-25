@@ -5,7 +5,7 @@ lifecycle and the parent's identity *is* the auth boundary -- there is no
 network port and no token to check. The one rule: **stdout is the JSON-RPC
 channel**, so every log line must go to stderr.
 
-Python twin of ``../ts/src/transports/stdio.py``.
+Python twin of ``../starter/src/transports/stdio.py``.
 """
 
 from __future__ import annotations

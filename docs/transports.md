@@ -22,7 +22,7 @@ MCP_TRANSPORT=http   MCP_HTTP_PORT=3000 node dist/cli.js
 Properties: no port, no network surface, **no auth to configure** — the parent
 process that launched the server *is* the identity boundary. The one rule:
 **stdout is the JSON-RPC channel**, so all logging goes to **stderr**
-(`starter/ts/src/transports/stdio.ts` only ever writes to stderr).
+(`starter/src/transports/stdio.ts` only ever writes to stderr).
 
 ## Pick Streamable HTTP when…
 
@@ -30,7 +30,7 @@ process that launched the server *is* the identity boundary. The one rule:
 - You need auth, horizontal scaling, or a server reachable over the network.
 
 Properties: an HTTP endpoint (default `/mcp`), a bearer-token auth hook, and
-DNS-rebinding protection. Two sub-modes (`starter/ts/src/transports/http.ts`):
+DNS-rebinding protection. Two sub-modes (`starter/src/transports/http.ts`):
 
 | Mode | `MCP_STATELESS` | Behaviour | Use when |
 | --- | --- | --- | --- |
@@ -58,6 +58,6 @@ monolith that recreates the integration spaghetti MCP exists to remove.
 
 ## The Python twin
 
-`starter/py` mirrors all of the above on the official Python SDK (`FastMCP`):
+`python-twin` mirrors all of the above on the official Python SDK (`FastMCP`):
 `MCP_TRANSPORT=http` maps to the SDK's `streamable-http`, with the same env
 vars and the same bearer-token middleware.

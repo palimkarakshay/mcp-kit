@@ -1,4 +1,4 @@
-"""mcp-kit-starter -- the hardened MCP server base, Python twin of ``../ts``.
+"""mcp-kit-starter -- the hardened MCP server base, Python twin of ``../starter``.
 
 Hardened MCP server base: transport selection (stdio + Streamable HTTP), an auth
 hook, structured errors, and a tool helper. Importable to build your own server,

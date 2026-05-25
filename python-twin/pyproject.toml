@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "mcp-kit-starter"
 version = "0.1.0"
-description = "Hardened MCP server base (Python twin of mcp-kit/starter/ts): transport selection (stdio + Streamable HTTP), an auth hook, structured errors, and a tool helper."
+description = "Hardened MCP server base (Python twin of mcp-kit/starter): transport selection (stdio + Streamable HTTP), an auth hook, structured errors, and a tool helper."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"

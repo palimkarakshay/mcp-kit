@@ -1,7 +1,7 @@
 """The starter's tool registry.
 
 Recipes export their own list of the same shape; tests and tooling discover all
-of them. Python twin of ``../ts/src/starter.tools.ts``.
+of them. Python twin of ``../starter/src/starter.tools.ts``.
 """
 
 from __future__ import annotations

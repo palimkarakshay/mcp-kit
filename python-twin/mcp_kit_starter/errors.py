@@ -7,7 +7,7 @@ A tool must never leak a raw stack trace or an opaque object back to the model
 returned as ``structuredContent`` alongside an ``isError=True`` tool result, so
 the model sees both prose and structure.
 
-This is the Python twin of ``../ts/src/errors.ts``.
+This is the Python twin of ``../starter/src/errors.ts``.
 """
 
 from __future__ import annotations

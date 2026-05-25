@@ -4,7 +4,7 @@ A production-grade [Model Context Protocol](https://modelcontextprotocol.io)
 server starter, built on the official Python SDK
 ([`mcp`](https://pypi.org/project/mcp/) / `FastMCP`).
 
-This is the **Python twin of [`../ts`](../ts)** — the same hardened base, the
+This is the **Python twin of [`../starter`](../starter)** — the same hardened base, the
 same behaviour, the same environment variables:
 
 - **Two transports, one entry point**, selected by `MCP_TRANSPORT`: local
@@ -28,7 +28,7 @@ same behaviour, the same environment variables:
 Create a virtualenv and install the package (editable, with dev/test extras):
 
 ```bash
-cd starter/py
+cd python-twin
 python3 -m venv .venv
 .venv/bin/pip install -e ".[dev]"
 ```
@@ -104,7 +104,7 @@ end-to-end stdio smoke test against a spawned `python -m mcp_kit_starter`.
 ## Layout
 
 ```
-starter/py/
+python-twin/
 ├── pyproject.toml            # package "mcp-kit-starter", dep on mcp>=1.27
 ├── requirements-dev.txt      # dev/test deps (pytest)
 ├── README.md

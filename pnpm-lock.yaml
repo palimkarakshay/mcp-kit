@@ -25,7 +25,7 @@ importers:
     dependencies:
       '@mcp-kit/core':
         specifier: workspace:*
-        version: link:../starter/ts
+        version: link:../starter
       zod:
         specifier: ^3.25.76
         version: 3.25.76
@@ -34,7 +34,7 @@ importers:
     dependencies:
       '@mcp-kit/core':
         specifier: workspace:*
-        version: link:../../starter/ts
+        version: link:../../starter
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@3.25.76)
@@ -46,7 +46,7 @@ importers:
     dependencies:
       '@mcp-kit/core':
         specifier: workspace:*
-        version: link:../../starter/ts
+        version: link:../../starter
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@3.25.76)
@@ -58,7 +58,7 @@ importers:
     dependencies:
       '@mcp-kit/core':
         specifier: workspace:*
-        version: link:../../starter/ts
+        version: link:../../starter
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@3.25.76)
@@ -70,7 +70,7 @@ importers:
     dependencies:
       '@mcp-kit/core':
         specifier: workspace:*
-        version: link:../../starter/ts
+        version: link:../../starter
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@3.25.76)
@@ -78,7 +78,7 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
 
-  starter/ts:
+  starter:
     dependencies:
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0

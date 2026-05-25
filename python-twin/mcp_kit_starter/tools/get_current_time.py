@@ -6,7 +6,7 @@ do, fully-described parameters, worked examples, an output schema, read-only
 annotations, structured-error failure -- and **no credentials in the input**
 (the time zone is data, not a secret).
 
-This is the Python twin of ``../ts/src/tools/get-current-time.ts``.
+This is the Python twin of ``../starter/src/tools/get-current-time.ts``.
 """
 
 from __future__ import annotations

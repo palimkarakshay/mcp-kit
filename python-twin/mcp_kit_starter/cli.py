@@ -4,7 +4,7 @@ and runs it over the selected transport.
     MCP_TRANSPORT=stdio  python -m mcp_kit_starter
     MCP_TRANSPORT=http MCP_HTTP_PORT=3000 MCP_AUTH_TOKEN=secret python -m mcp_kit_starter
 
-Python twin of ``../ts/src/cli.py``.
+Python twin of ``../starter/src/cli.py``.
 """
 
 from __future__ import annotations

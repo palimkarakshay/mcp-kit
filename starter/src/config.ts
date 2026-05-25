@@ -5,7 +5,7 @@
  * read from the environment so the same build runs locally over stdio and
  * remotely over Streamable HTTP without code changes.
  *
- * See `docs/transport-selection.md` and `docs/auth-patterns.md`.
+ * See `docs/transports.md` and `docs/auth-patterns.md`.
  */
 import { z } from "zod";
 

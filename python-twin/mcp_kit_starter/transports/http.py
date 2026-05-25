@@ -8,7 +8,7 @@ Auth and DNS-rebinding protection live here, at the transport -- not in any
 tool's inputs. The shared-bearer-token check is applied as a Starlette
 middleware wrapping FastMCP's Streamable HTTP app.
 
-Python twin of ``../ts/src/transports/http.py``.
+Python twin of ``../starter/src/transports/http.py``.
 """
 
 from __future__ import annotations

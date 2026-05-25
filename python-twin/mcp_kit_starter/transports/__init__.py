@@ -1,6 +1,6 @@
 """Transport selection: dispatch to stdio or Streamable HTTP from config.
 
-Python twin of ``../ts/src/transports/index.py``.
+Python twin of ``../starter/src/transports/index.py``.
 """
 
 from __future__ import annotations

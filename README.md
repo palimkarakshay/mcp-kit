@@ -7,29 +7,31 @@ small, hardened base you actually ship, plus worked recipes for the integrations
 you'll really build, plus a lint that keeps your tool descriptions good enough
 for a model to use.
 
-- **One base** — `starter/` — a hardened server with transport selection
-  (stdio **and** Streamable HTTP), an auth hook, structured errors, and a typed
-  tool helper. TypeScript, with a **Python twin**.
+- **One base** — `starter/` — a hardened TypeScript server (`@mcp-kit/core`) with
+  transport selection (stdio **and** Streamable HTTP), an auth hook, structured
+  errors, and a typed tool helper.
+- **A Python twin** — `python-twin/` — the smallest faithful mirror, so the
+  cookbook is language-agnostic.
 - **Recipes** — `recipes/` — `wrap-a-REST-API`, `wrap-a-SQL-DB`,
   `long-running-job`, `paginated-search`. Each is one focused server that
   imports the base.
 - **A tool-description lint** — `lint/` — scores every tool's name + description
   + schema against a rubric and fails CI below threshold.
-- **Docs** — `docs/` — transport selection, schema do/don't, auth patterns.
+- **Docs** — `docs/` — transport selection, schema design, auth patterns.
 
 ## Layout
 
 ```
-starter/
-  ts/        @mcp-kit/core — the base (importable) + runnable example server
-  py/        the Python twin (FastMCP)
+starter/              @mcp-kit/core — the base (importable) + runnable example server
+  src/{server,transports/{stdio,http},auth,tools/}.ts
+python-twin/          the Python twin (FastMCP) — same transports, auth, errors
 recipes/
   wrap-rest-api/      GitHub (public) + Anaplan (enterprise) REST → MCP tools
   wrap-sql-db/        read-only, parameterised SQL over node:sqlite
   long-running-job/   start → poll → cancel (async, returns a job id)
   paginated-search/   opaque cursor pagination over a dataset
-lint/        @mcp-kit/lint — the tool-description lint + rubric
-docs/        transport-selection · schema-dos-and-donts · auth-patterns
+lint/describe-lint.ts @mcp-kit/lint — the tool-description lint (+ rubric.md)
+docs/                 transports · schema-design · auth-patterns
 ```
 
 ## Quickstart (TypeScript)
@@ -39,10 +41,10 @@ pnpm install
 pnpm build            # builds @mcp-kit/core first, then the recipes that import it
 
 # Run the starter over stdio (logs to stderr; stdout is the JSON-RPC channel)
-MCP_TRANSPORT=stdio  node starter/ts/dist/cli.js
+MCP_TRANSPORT=stdio  node starter/dist/cli.js
 
 # …or over Streamable HTTP with auth
-MCP_TRANSPORT=http MCP_HTTP_PORT=3000 MCP_AUTH_TOKEN=s3cret node starter/ts/dist/cli.js
+MCP_TRANSPORT=http MCP_HTTP_PORT=3000 MCP_AUTH_TOKEN=s3cret node starter/dist/cli.js
 ```
 
 Point an MCP client at it (stdio example):
@@ -50,7 +52,7 @@ Point an MCP client at it (stdio example):
 ```jsonc
 {
   "mcpServers": {
-    "mcp-kit-starter": { "command": "node", "args": ["starter/ts/dist/cli.js"] }
+    "mcp-kit-starter": { "command": "node", "args": ["starter/dist/cli.js"] }
   }
 }
 ```
@@ -58,7 +60,7 @@ Point an MCP client at it (stdio example):
 ## Quickstart (Python twin)
 
 ```bash
-cd starter/py
+cd python-twin
 python -m venv .venv && . .venv/bin/activate
 pip install -e ".[dev]"
 MCP_TRANSPORT=stdio  python -m mcp_kit_starter
@@ -101,6 +103,18 @@ pnpm typecheck    # tsc --noEmit, every package
 pnpm test         # vitest, every package
 pnpm lint:tools   # the tool-description lint
 pnpm check        # all of the above, in order (the CI gate)
+```
+
+Poke the running server with the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
+
+```bash
+# stdio
+npx @modelcontextprotocol/inspector --cli node starter/dist/cli.js --method tools/list
+npx @modelcontextprotocol/inspector --cli node starter/dist/cli.js \
+  --method tools/call --tool-name get_current_time --tool-arg timezone=UTC
+
+# Streamable HTTP (start the server first: MCP_TRANSPORT=http node starter/dist/cli.js)
+npx @modelcontextprotocol/inspector --cli http://127.0.0.1:3000/mcp --method tools/list
 ```
 
 ## v0.1 status

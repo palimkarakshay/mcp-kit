@@ -2,7 +2,7 @@ import type { AnyToolSpec } from "@mcp-kit/core";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
 
-import { scoreTool } from "../src/score.js";
+import { scoreTool } from "./describe-lint.js";
 
 function spec(overrides: Partial<AnyToolSpec>): AnyToolSpec {
   return {

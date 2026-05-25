@@ -1,6 +1,6 @@
 """Build the starter MCP server: server identity + its tool registry.
 
-Python twin of ``../ts/src/server.py``.
+Python twin of ``../starter/src/server.py``.
 """
 
 from __future__ import annotations
