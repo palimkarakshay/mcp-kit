@@ -32,6 +32,7 @@ recipes/
   paginated-search/   opaque cursor pagination over a dataset
   wrap-crawl4ai/      Crawl4AI HTTP API → markdown / session / cosine tools
   wrap-qdrant/        Qdrant REST API → create / upsert / search (TS + Python twin)
+  wrap-abaplint/      abaplint (in-process) → lint string / file / directory + rule docs
 lint/describe-lint.ts @mcp-kit/lint — the tool-description lint (+ rubric.md)
 docs/                 transports · schema-design · auth-patterns
 ```
@@ -80,6 +81,7 @@ MCP_TRANSPORT=http MCP_AUTH_TOKEN=s3cret python -m mcp_kit_starter
 | [`wrap-crawl4ai`](recipes/wrap-crawl4ai) | Wrap a scraper HTTP API: reuses the REST recipe's error-mapping client. Tools: `fetch_markdown`, `fetch_with_session`, `extract_cosine`. | Needs a running Crawl4AI server. |
 | [`wrap-qdrant`](recipes/wrap-qdrant) | Wrap the Qdrant vector-DB REST API: `create_collection`, `upsert_points`, `search`. Ships a **Python twin**. (For curated *memory*, use Mem0 on top.) | Needs a running Qdrant. |
 | [`wrap-yfinance`](python-twin/recipes/wrap-yfinance) | **Python-only.** Wrap a library (yfinance) as one MCP server with caching + rate-limit handling. Tools: `get_ticker`, `get_news`, `get_chart`. | Yes (`yfinance` extra for live data). |
+| [`wrap-abaplint`](recipes/wrap-abaplint) | Wrap an in-process library (abaplint): `lint_string`, `lint_file`, `lint_directory`, `get_rule_explanations`. Ready to extract as a standalone abaplint MCP server. | Yes (bundles `@abaplint/core`). |
 
 The GitHub server wraps a **public endpoint** you can call for real:
 

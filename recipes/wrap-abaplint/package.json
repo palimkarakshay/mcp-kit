@@ -1,0 +1,23 @@
+{
+  "name": "@mcp-kit/recipe-abaplint",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Recipe: wrap abaplint (the ABAP linter) as MCP tools (lint_string, lint_file, lint_directory, get_rule_explanations). Ready to extract as a standalone abaplint MCP server.",
+  "license": "MIT",
+  "bin": {
+    "mcp-recipe-abaplint": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@abaplint/core": "^2.108.0",
+    "@mcp-kit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}
