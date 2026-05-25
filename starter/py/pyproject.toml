@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-kit-starter"
+version = "0.1.0"
+description = "Hardened MCP server base (Python twin of mcp-kit/starter/ts): transport selection (stdio + Streamable HTTP), an auth hook, structured errors, and a tool helper."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "mcp-kit" }]
+keywords = ["mcp", "model-context-protocol", "fastmcp", "starter"]
+dependencies = [
+  "mcp>=1.27",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+]
+
+[project.scripts]
+mcp-kit-starter = "mcp_kit_starter.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_kit_starter"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

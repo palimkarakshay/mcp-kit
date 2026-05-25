@@ -1,0 +1,24 @@
+{
+  "name": "@mcp-kit/recipe-rest",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Recipe: wrap a REST API as MCP tools. Two worked servers — the public GitHub API (no/optional auth) and the Anaplan integration API (credential exchange) — sharing one hardened REST client.",
+  "license": "MIT",
+  "bin": {
+    "mcp-recipe-github": "./dist/github/cli.js",
+    "mcp-recipe-anaplan": "./dist/anaplan/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev:github": "tsx src/github/cli.ts",
+    "dev:anaplan": "tsx src/anaplan/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mcp-kit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}

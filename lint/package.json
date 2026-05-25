@@ -1,0 +1,20 @@
+{
+  "name": "@mcp-kit/lint",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Scores each MCP tool's name + description + schema against the tool-design rubric and fails CI below threshold.",
+  "license": "MIT",
+  "bin": {
+    "mcp-tool-lint": "./src/cli.ts"
+  },
+  "scripts": {
+    "lint": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mcp-kit/core": "workspace:*",
+    "zod": "^3.25.76"
+  }
+}

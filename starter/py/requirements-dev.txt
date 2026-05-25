@@ -1,0 +1,6 @@
+# Dev/test dependencies for the Python starter. Runtime deps live in
+# pyproject.toml ([project].dependencies). Install with:
+#   .venv/bin/pip install -e ".[dev]"
+# or:
+#   .venv/bin/pip install -r requirements-dev.txt
+pytest>=8

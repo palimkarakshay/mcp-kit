@@ -1,0 +1,4 @@
+packages:
+  - "starter/ts"
+  - "recipes/*"
+  - "lint"

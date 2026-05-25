@@ -1,0 +1,22 @@
+{
+  "name": "@mcp-kit/recipe-sql",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Recipe: wrap a SQL database as MCP tools, safely — read-only queries, parameterised statements, capped result sets. Uses Node's built-in node:sqlite.",
+  "license": "MIT",
+  "bin": {
+    "mcp-recipe-sql": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mcp-kit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}

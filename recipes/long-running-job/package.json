@@ -1,0 +1,22 @@
+{
+  "name": "@mcp-kit/recipe-jobs",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Recipe: the async + polling pattern. A tool starts long-running work and returns a job id immediately; separate tools poll status, cancel, and list jobs — the opposite of run-and-wait. In-memory job store, no network.",
+  "license": "MIT",
+  "bin": {
+    "mcp-recipe-jobs": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mcp-kit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}

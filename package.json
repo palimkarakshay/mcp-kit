@@ -1,0 +1,28 @@
+{
+  "name": "mcp-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Production-grade MCP server starter + cookbook: one hardened base, four recipes, a tool-description lint.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint:tools": "pnpm --filter @mcp-kit/lint run lint",
+    "check": "pnpm build && pnpm typecheck && pnpm test && pnpm lint:tools"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}
