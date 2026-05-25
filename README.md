@@ -79,6 +79,7 @@ MCP_TRANSPORT=http MCP_AUTH_TOKEN=s3cret python -m mcp_kit_starter
 | [`paginated-search`](recipes/paginated-search) | Opaque cursor pagination done right. | Yes (in-memory). |
 | [`wrap-crawl4ai`](recipes/wrap-crawl4ai) | Wrap a scraper HTTP API: reuses the REST recipe's error-mapping client. Tools: `fetch_markdown`, `fetch_with_session`, `extract_cosine`. | Needs a running Crawl4AI server. |
 | [`wrap-qdrant`](recipes/wrap-qdrant) | Wrap the Qdrant vector-DB REST API: `create_collection`, `upsert_points`, `search`. Ships a **Python twin**. (For curated *memory*, use Mem0 on top.) | Needs a running Qdrant. |
+| [`wrap-yfinance`](python-twin/recipes/wrap-yfinance) | **Python-only.** Wrap a library (yfinance) as one MCP server with caching + rate-limit handling. Tools: `get_ticker`, `get_news`, `get_chart`. | Yes (`yfinance` extra for live data). |
 
 The GitHub server wraps a **public endpoint** you can call for real:
 

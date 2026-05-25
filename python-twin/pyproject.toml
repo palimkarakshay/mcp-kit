@@ -19,6 +19,11 @@ dependencies = [
 dev = [
   "pytest>=8",
 ]
+# Live data for recipes/wrap-yfinance. Not needed for tests (they inject a fake
+# source), so it stays out of `dev` and CI.
+yfinance = [
+  "yfinance>=0.2",
+]
 
 [project.scripts]
 mcp-kit-starter = "mcp_kit_starter.cli:main"
