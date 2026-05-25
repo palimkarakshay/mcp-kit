@@ -30,6 +30,7 @@ const listTables = defineTool({
     "Use this first when you do not yet know the schema — it returns the table names you can then inspect with " +
     "describe_table or read with run_select_query. " +
     "It does not return columns, row counts, or any data; it only lists table names. " +
+    "Part of the wrap-sql-db server (a safe SQL-database wrapper), not a primitive. " +
     "Example: list_tables({}).",
   inputSchema: {},
   outputSchema: {
@@ -51,6 +52,7 @@ const describeTable = defineTool({
     "Use this when you know a table's name (from list_tables) and need its column names, types, nullability and " +
     "primary-key flags before writing a query. " +
     "It does not return the table's rows and does not run a query — use run_select_query for data. " +
+    "Part of the wrap-sql-db server (a safe SQL-database wrapper), not a primitive. " +
     'Example: describe_table({ "table_name": "orders" }).',
   inputSchema: {
     table_name: z
@@ -92,6 +94,7 @@ const runSelectQuery = defineTool({
     "interpolate values into the SQL string (that is how injection happens). " +
     "It rejects anything that is not a single read-only statement: it does not insert, update, delete, alter, run " +
     "multiple statements, or return more than max_rows rows. " +
+    "Part of the wrap-sql-db server (a safe SQL-database wrapper), not a primitive. " +
     'Example: run_select_query({ "sql": "SELECT name, city FROM customers WHERE city = ?", "params": ["London"] }).',
   inputSchema: {
     sql: z

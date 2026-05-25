@@ -30,6 +30,7 @@ recipes/
   wrap-sql-db/        read-only, parameterised SQL over node:sqlite
   long-running-job/   start → poll → cancel (async, returns a job id)
   paginated-search/   opaque cursor pagination over a dataset
+  wrap-crawl4ai/      Crawl4AI HTTP API → markdown / session / cosine tools
 lint/describe-lint.ts @mcp-kit/lint — the tool-description lint (+ rubric.md)
 docs/                 transports · schema-design · auth-patterns
 ```
@@ -75,6 +76,7 @@ MCP_TRANSPORT=http MCP_AUTH_TOKEN=s3cret python -m mcp_kit_starter
 | [`wrap-sql-db`](recipes/wrap-sql-db) | Wrap a SQL DB **safely**: read-only, parameterised, capped. | Yes (seeded in-memory demo DB). |
 | [`long-running-job`](recipes/long-running-job) | Async + polling: start returns an id, poll for the result. | Yes (in-memory). |
 | [`paginated-search`](recipes/paginated-search) | Opaque cursor pagination done right. | Yes (in-memory). |
+| [`wrap-crawl4ai`](recipes/wrap-crawl4ai) | Wrap a scraper HTTP API: reuses the REST recipe's error-mapping client. Tools: `fetch_markdown`, `fetch_with_session`, `extract_cosine`. | Needs a running Crawl4AI server. |
 
 The GitHub server wraps a **public endpoint** you can call for real:
 

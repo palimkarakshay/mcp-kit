@@ -64,6 +64,40 @@ The model passes only *data* — an owner/repo, an action id — and the server
 attaches credentials at the transport/client boundary. That separation is the
 whole point: the model orchestrates; the transport authenticates.
 
+## Anaplan caveat
+
+Authenticating cleanly is necessary but **not sufficient**: you also have to be
+allowed to call the API the way you intend to.
+
+Anaplan's terms place restrictions on programmatic and automated/agent use of
+the **Integration API**. Wrapping it as MCP tools that a model can drive
+autonomously can run past those terms — especially the *mutating* actions
+(running imports, exports and processes against a production model). Auth
+correctness does not grant ToS permission.
+
+Because of that, the `wrap-rest-api` **Anaplan server ships read-only by
+default**:
+
+- On start it prints a **banner** to stderr stating the mode and the caveat.
+- Only the discovery tool (`list_anaplan_actions`) is registered by default; the
+  mutating `run_anaplan_import` / `run_anaplan_export` / `run_anaplan_process`
+  tools are **withheld**.
+- Enabling writes is an explicit opt-in — `--allow-writes` (or
+  `ANAPLAN_ALLOW_WRITES=1`) — and doing so is **your responsibility under
+  Anaplan's terms**, not the recipe's.
+
+```bash
+# default: read-only (discovery only) + a startup banner
+node dist/anaplan/cli.js
+
+# opt in to the mutating run_* tools (review Anaplan's terms first)
+node dist/anaplan/cli.js --allow-writes
+```
+
+The same principle generalises: when you wrap a vendor API, check whether your
+intended *use* (not just your auth) is within that vendor's terms, and default
+the high-blast-radius tools off.
+
 ## HTTP threat model
 
 The Streamable HTTP transport is the one with a network surface. The starter's

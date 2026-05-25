@@ -46,6 +46,12 @@ export interface ScoreOptions {
   threshold: number;
 }
 
+/** Extra, path-derived context about where a tool was discovered. */
+export interface ScoreContext {
+  /** Absolute path of the `*.tools.ts` file the spec came from, if known. */
+  file?: string;
+}
+
 export const DEFAULT_THRESHOLD = 80;
 
 /** Imperative verbs a good tool name starts with. Extend deliberately. */
@@ -69,6 +75,18 @@ const VERBS = new Set([
  */
 const CREDENTIAL_RE =
   /(password|passwd|pwd|secret(?:_?key)?|client_?secret|private_?key|api_?key|apikey|access_?key|access_?token|refresh_?token|auth_?token|session_?token|bearer_?token|\boauth\b|credentials?|authorization)/i;
+
+/**
+ * Derive the `wrap-<name>` server category from a tool file's path, if it lives
+ * under a `wrap-*` recipe (e.g. `recipes/wrap-qdrant/...` → `wrap-qdrant`). A
+ * tool that has a category is a *domain wrapper*; one that does not is a
+ * primitive, and is not asked to name a category.
+ */
+export function wrapperCategory(file: string | undefined): string | undefined {
+  if (!file) return undefined;
+  const match = /[\\/](wrap-[a-z0-9][a-z0-9-]*)[\\/]/.exec(file);
+  return match?.[1];
+}
 
 const WHEN_TO_USE_RE = /\buse (?:this|it|the|when|to)\b/i;
 const NON_GOAL_RE =
@@ -107,6 +125,7 @@ function clamp(n: number, lo: number, hi: number): number {
 export function scoreTool(
   spec: AnyToolSpec,
   options: ScoreOptions = { threshold: DEFAULT_THRESHOLD },
+  context: ScoreContext = {},
 ): ToolScore {
   const name = typeof spec.name === "string" ? spec.name : "(unnamed)";
   const description = typeof spec.description === "string" ? spec.description : "";
@@ -209,6 +228,25 @@ export function scoreTool(
     earned: shapeOk ? 5 : clamp(Math.round((Math.min(len, 80) / 80) * 5), 0, 5),
     note: `${len} chars, ${sentences} sentence(s)`,
   });
+
+  // category_signal (10) — only applies to tools that belong to a `wrap-*`
+  // recipe (a domain wrapper). Their description should name the wrap-<name>
+  // category so a model can tell a domain wrapper apart from a primitive. Tools
+  // that are not under a `wrap-*` path are primitives; the check is skipped for
+  // them, so their maximum stays 100.
+  const category = wrapperCategory(context.file);
+  if (category) {
+    const categoryOk = new RegExp(`\\b${category}\\b`, "i").test(description);
+    checks.push({
+      id: "category_signal",
+      label: "names wrap-* category",
+      weight: 10,
+      earned: categoryOk ? 10 : 0,
+      note: categoryOk
+        ? `mentions "${category}"`
+        : `name the "${category}" category so a model knows this is a domain wrapper`,
+    });
+  }
 
   const earned = checks.reduce((sum, c) => sum + c.earned, 0);
   const max = checks.reduce((sum, c) => sum + c.weight, 0);
@@ -352,7 +390,7 @@ export async function runCli(argv: string[] = process.argv.slice(2)): Promise<nu
   const { tools, files, errors } = await discoverTools(args.root);
 
   const scores = tools
-    .map(({ spec }) => scoreTool(spec, { threshold: args.threshold }))
+    .map(({ spec, file }) => scoreTool(spec, { threshold: args.threshold }, { file }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
   if (args.json) {

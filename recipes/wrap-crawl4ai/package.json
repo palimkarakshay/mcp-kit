@@ -1,0 +1,22 @@
+{
+  "name": "@mcp-kit/recipe-crawl4ai",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Recipe: wrap the Crawl4AI HTTP API as MCP tools (fetch_markdown, fetch_with_session, extract_cosine) using the kit's hardened REST client. Copy it to expose your own scraper service over MCP without learning the SDK.",
+  "license": "MIT",
+  "bin": {
+    "mcp-recipe-crawl4ai": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mcp-kit/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}

@@ -36,6 +36,7 @@ const getRepository = defineTool({
     "language, default branch, topics, and when it was last pushed. " +
     "It does not search across repositories, read file or README contents, or list a user's repos; " +
     "reach for a search tool or a contents endpoint for those. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: get_repository({ "owner": "modelcontextprotocol", "repo": "servers" }).',
   inputSchema: {
     owner: z
@@ -79,6 +80,7 @@ const listRepositoryIssues = defineTool({
     "It returns a single page (not the whole repo) and does not create, comment on, close, or search the " +
     "full-text of issues; use a write tool or a search tool for those. Note that GitHub's issues feed also " +
     "includes pull requests, which are excluded by default here. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: list_repository_issues({ "owner": "modelcontextprotocol", "repo": "servers", "state": "open" }).',
   inputSchema: {
     owner: z.string().min(1).describe('Repository owner (user or org login), e.g. "modelcontextprotocol".'),

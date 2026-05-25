@@ -2,7 +2,7 @@ import type { AnyToolSpec } from "@mcp-kit/core";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
 
-import { scoreTool } from "./describe-lint.js";
+import { DEFAULT_THRESHOLD, scoreTool } from "./describe-lint.js";
 
 function spec(overrides: Partial<AnyToolSpec>): AnyToolSpec {
   return {
@@ -80,5 +80,39 @@ describe("scoreTool", () => {
     );
     const params = result.checks.find((c) => c.id === "params_described");
     expect(params?.earned).toBe(10);
+  });
+
+  it("does not apply the category check to primitives (no wrap-* path)", () => {
+    const result = scoreTool(spec({}));
+    expect(result.checks.find((c) => c.id === "category_signal")).toBeUndefined();
+    expect(result.score).toBe(100);
+  });
+
+  it("rewards a wrap-* tool that names its category", () => {
+    const result = scoreTool(
+      spec({
+        description:
+          "Search a Qdrant collection by vector. Use this when you have an embedding and want nearest neighbours. " +
+          "It does not embed text for you. Part of the wrap-qdrant server (a Qdrant wrapper). " +
+          "Example: search({ collection: 'docs' }).",
+      }),
+      { threshold: DEFAULT_THRESHOLD },
+      { file: "/repo/recipes/wrap-qdrant/src/qdrant.tools.ts" },
+    );
+    const category = result.checks.find((c) => c.id === "category_signal");
+    expect(category?.earned).toBe(10);
+    expect(result.score).toBe(100);
+  });
+
+  it("docks a wrap-* tool that omits its category, without hard-failing", () => {
+    const result = scoreTool(
+      spec({}),
+      { threshold: DEFAULT_THRESHOLD },
+      { file: "/repo/recipes/wrap-qdrant/src/qdrant.tools.ts" },
+    );
+    const category = result.checks.find((c) => c.id === "category_signal");
+    expect(category?.earned).toBe(0);
+    expect(result.score).toBe(91);
+    expect(result.passed).toBe(true);
   });
 });

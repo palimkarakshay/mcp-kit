@@ -51,6 +51,7 @@ const runImport = defineTool({
     "COMPLETE, and reports success or the failure dump. " +
     "It does not create or edit import actions and does not upload a local file first — the import reads whatever " +
     "file the action is bound to. Discover ids with list_anaplan_actions. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: run_anaplan_import({ "import_id": "112000000012" }).',
   inputSchema: {
     import_id: z.string().min(1).describe("The id of an existing import action in the configured model."),
@@ -78,6 +79,7 @@ const runExport = defineTool({
     "and need to know it completed: it starts the export, polls until COMPLETE, and reports the result. " +
     "It does not download the produced file's bytes and does not define exports; downloading is a separate, chunked " +
     "step. Discover ids with list_anaplan_actions. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: run_anaplan_export({ "export_id": "116000000007" }).',
   inputSchema: {
     export_id: z.string().min(1).describe("The id of an existing export action in the configured model."),
@@ -106,6 +108,7 @@ const runProcess = defineTool({
     "succeeded. " +
     "It does not run a single action in isolation (use run_anaplan_import / run_anaplan_export for that) and does not " +
     "edit the process. Discover ids with list_anaplan_actions. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: run_anaplan_process({ "process_id": "118000000005" }).',
   inputSchema: {
     process_id: z.string().min(1).describe("The id of an existing process in the configured model."),
@@ -132,6 +135,7 @@ const listActions = defineTool({
     "Use this first whenever you do not already know an action's id — it returns the ids and names for the requested " +
     "kind so you can pass one to run_anaplan_import / run_anaplan_export / run_anaplan_process. " +
     "It does not run anything and does not return action definitions, mappings, or file contents. " +
+    "Part of the wrap-rest-api server (a REST-API wrapper), not a primitive. " +
     'Example: list_anaplan_actions({ "kind": "processes" }).',
   inputSchema: {
     kind: z

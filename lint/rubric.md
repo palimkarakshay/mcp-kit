@@ -16,7 +16,7 @@ agents*. The lint (`@mcp-kit/lint`) turns it into a score and a CI gate.
   the model*, and the model must never handle credentials. Auth lives at the
   transport (bearer token on Streamable HTTP; the parent process on stdio).
 
-## Scored checks (weighted, 100 total; default pass threshold 80)
+## Scored checks (weighted; 100 total, +10 for `wrap-*` tools; default pass threshold 80)
 
 | Check | Weight | What it looks for |
 | --- | ---: | --- |
@@ -27,6 +27,21 @@ agents*. The lint (`@mcp-kit/lint`) turns it into a score and a CI gate.
 | `params_described` | 20 | Every input field has a clear `.describe(...)` (≥ 12 chars). Unambiguous parameters. |
 | `examples` | 15 | At least one worked example (in `examples`, or shown in the description). |
 | `description_shape` | 5 | Substantive prose (multiple sentences, not a one-liner, not a wall of text). |
+| `category_signal` | 10 | **Only for tools under a `wrap-*` recipe.** The description names the `wrap-<name>` category (e.g. `wrap-qdrant`), so a model can tell a *domain wrapper* from a *primitive*. |
+
+### `category_signal`: domain wrapper vs. primitive
+
+This check applies **only** to tools discovered under a `wrap-*` recipe
+directory — those are domain wrappers (they wrap one named upstream: Qdrant,
+Crawl4AI, yfinance, …). Their description should include the `wrap-<name>`
+category, derived from the recipe folder, so that when a model is choosing among
+many tools it can tell "this is the Qdrant wrapper" from a generic primitive
+like `get_current_time`.
+
+Tools that are **not** under a `wrap-*` path are primitives: the check is
+skipped for them and their maximum stays 100. For a domain wrapper the maximum
+is 110, so a wrapper that names its category still scores 100/100; one that omits
+it loses 10 points (a soft nudge, not a hard fail).
 
 ## Why these, in one line each
 

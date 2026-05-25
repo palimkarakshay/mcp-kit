@@ -54,6 +54,18 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
 
+  recipes/wrap-crawl4ai:
+    dependencies:
+      '@mcp-kit/core':
+        specifier: workspace:*
+        version: link:../../starter
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.29.0
+        version: 1.29.0(zod@3.25.76)
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
+
   recipes/wrap-rest-api:
     dependencies:
       '@mcp-kit/core':

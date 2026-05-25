@@ -36,12 +36,21 @@ action **starts an async task and polls until `COMPLETE`**.
 ```bash
 ANAPLAN_EMAIL=you@example.com ANAPLAN_PASSWORD=… \
 ANAPLAN_WORKSPACE_ID=… ANAPLAN_MODEL_ID=… \
-MCP_TRANSPORT=stdio node dist/anaplan/cli.js
+MCP_TRANSPORT=stdio node dist/anaplan/cli.js              # read-only (default)
+
+# opt in to the mutating run_* tools (review Anaplan's terms first):
+MCP_TRANSPORT=stdio node dist/anaplan/cli.js --allow-writes
 ```
 
 Tools:
-- `list_anaplan_actions({ kind? })` — discover ids (imports/exports/processes/actions).
-- `run_anaplan_import({ import_id })` · `run_anaplan_export({ export_id })` · `run_anaplan_process({ process_id })` — run by id and wait for the task to finish.
+- `list_anaplan_actions({ kind? })` — discover ids (imports/exports/processes/actions). *Read-only; always available.*
+- `run_anaplan_import({ import_id })` · `run_anaplan_export({ export_id })` · `run_anaplan_process({ process_id })` — run by id and wait for the task to finish. *Mutating; withheld unless `--allow-writes`.*
+
+> **Read-only by default.** Anaplan's terms restrict programmatic/agent use of
+> the Integration API, so this server registers only the discovery tool by
+> default and prints a startup banner; the `run_*` tools require `--allow-writes`
+> (or `ANAPLAN_ALLOW_WRITES=1`), at your own ToS risk. See
+> [`docs/auth-patterns.md`](../../docs/auth-patterns.md) → "Anaplan caveat".
 
 > The Anaplan server needs a live tenant to do real work. The test suite drives
 > it with an **injected fetch** (no tenant, no network), exercising the full
