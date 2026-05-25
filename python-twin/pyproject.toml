@@ -24,6 +24,10 @@ dev = [
 yfinance = [
   "yfinance>=0.2",
 ]
+# Live data for recipes/wrap-reddit-stock. Likewise kept out of `dev` and CI.
+reddit = [
+  "praw>=7.7",
+]
 
 [project.scripts]
 mcp-kit-starter = "mcp_kit_starter.cli:main"

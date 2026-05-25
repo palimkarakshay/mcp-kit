@@ -82,6 +82,7 @@ MCP_TRANSPORT=http MCP_AUTH_TOKEN=s3cret python -m mcp_kit_starter
 | [`wrap-qdrant`](recipes/wrap-qdrant) | Wrap the Qdrant vector-DB REST API: `create_collection`, `upsert_points`, `search`. Ships a **Python twin**. (For curated *memory*, use Mem0 on top.) | Needs a running Qdrant. |
 | [`wrap-yfinance`](python-twin/recipes/wrap-yfinance) | **Python-only.** Wrap a library (yfinance) as one MCP server with caching + rate-limit handling. Tools: `get_ticker`, `get_news`, `get_chart`. | Yes (`yfinance` extra for live data). |
 | [`wrap-abaplint`](recipes/wrap-abaplint) | Wrap an in-process library (abaplint): `lint_string`, `lint_file`, `lint_directory`, `get_rule_explanations`. Ready to extract as a standalone abaplint MCP server. | Yes (bundles `@abaplint/core`). |
+| [`wrap-reddit-stock`](python-twin/recipes/wrap-reddit-stock) | **Python-only.** Wrap PRAW with stock-symbol detection. Tools: `get_subreddit_posts`, `search_posts`, `get_trending_symbols`. | Needs Reddit API creds + `reddit` extra. |
 
 The GitHub server wraps a **public endpoint** you can call for real:
 
